@@ -1,5 +1,7 @@
 package com.microservice.store.service;
 
+import com.microservice.store.dtos.InfoOrderDTO;
+import com.microservice.store.model.Purchase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,16 @@ public class PurchaseService {
 	@Autowired
 	private SupplierClient supplierClient;
 	
-	public void insert(PurchaseDTO dto) {
+	public Purchase insert(PurchaseDTO dto) {
 		SupplierInformationDTO info = supplierClient.getInfoByState(dto.getAddress().getState());
+		InfoOrderDTO order =  supplierClient.placeOrder(dto.getItems());
+
+		Purchase purchase = new Purchase();
+		purchase.setOrderId(order.getId());
+		purchase.setPreparationTime(order.getPreparationTime());
+		purchase.setDestinationAddress(dto.getAddress().toString());
+
+		return purchase;
 	}
 
 }

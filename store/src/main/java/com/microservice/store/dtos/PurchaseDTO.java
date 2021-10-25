@@ -19,5 +19,5 @@ public class PurchaseDTO {
 	public void setAddress(AddressDTO address) {
 		this.address = address;
 	}
-	
 }
+

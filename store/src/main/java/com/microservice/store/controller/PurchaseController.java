@@ -1,5 +1,6 @@
 package com.microservice.store.controller;
 
+import com.microservice.store.model.Purchase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +18,8 @@ public class PurchaseController {
 	private PurchaseService service;
 	
 	@PostMapping
-	public void insert(@RequestBody PurchaseDTO dto) {
-		service.insert(dto);
+	public Purchase insert(@RequestBody PurchaseDTO dto) {
+		return service.insert(dto);
 	}
 	
 }
